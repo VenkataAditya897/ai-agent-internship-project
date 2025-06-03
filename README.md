@@ -33,8 +33,8 @@ A Flask-based AI-powered system that accepts multi-format inputs (email, JSON, P
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/multi-format-intake-agent.git
-   cd multi-format-intake-agent
+   git clone https://github.com/VenkataAditya897/ai-agent-internship-project.git
+   cd ai-agent-internship-project
 
 2. Create a `.env` file in the root directory with your Groq API key:  
    Get the keys from [https://console.groq.com/home](https://console.groq.com/home)
@@ -46,7 +46,6 @@ A Flask-based AI-powered system that accepts multi-format inputs (email, JSON, P
 
     ```bash
     pip install -r requirements.txt
-
    
 4. Run the Flask app locally:
 
@@ -57,7 +56,20 @@ A Flask-based AI-powered system that accepts multi-format inputs (email, JSON, P
 
 
 ### Setup ( With Docker )
-   
+
+1. docker build -t multi-format-intake-agent .
+
+   ```bash
+   docker build -t multi-format-intake-agent .
+
+2. Run the Docker container:
+   Get the keys from [https://console.groq.com/home](https://console.groq.com/home)
+   Replace `"Your_API_Key"` below with your actual Groq API key and run:
+    
+    ```bash
+    docker run -p 5000:5000 -e GROQ_API_KEY="Your_API_Key" intake-agent
+
+3. Open your browser at http://127.0.0.1:5000 to access the UI.
 
 
    
