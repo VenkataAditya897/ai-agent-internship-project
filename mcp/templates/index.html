@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Multi-Format Intake Agent</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body { background-color: #ffffff; }
+    .container { max-width: 700px; }
+    .navbar {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+    .form-label { font-weight: 600; }
+    .navbar-brand {
+  font-size: 2rem;
+  color: #6366f1 !important; /* Tailwind’s indigo-500 */
+}
+
+.navbar .nav-link {
+  color: #4b5563 !important; /* Tailwind’s gray-600 */
+}
+.navbar .nav-link {
+  padding: 0.75rem 1rem;
+  font-size: 1.1rem;
+}
+.navbar-brand img {
+  height: 45px; /* Adjust height as needed */
+}
+
+
+.navbar .nav-link.active {
+  color: #6366f1 !important;
+}
+
+.btn-primary {
+  background-color: #6366f1;
+  border-color: #6366f1;
+}
+
+.btn-outline-secondary {
+  border-color: #d1d5db;
+  color: #4b5563;
+}
+
+.navbar .nav-link {
+  position: relative;
+  color: #4b5563 !important; /* Tailwind gray-600 */
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #6366f1; /* Tailwind indigo-500 */
+  transition: width 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+  color: #6366f1 !important;
+}
+
+.navbar .nav-link:hover::after {
+  width: 100%;
+  
+}
+.navbar .nav-link.active::after {
+  width: 100%;
+}
+.navbar-nav .nav-item {
+  margin: 0 10px;
+}
+
+.hero-section {
+  /* background: radial-gradient(ellipse at center, #eef4ff, #e0f2fe); */
+  background: linear-gradient(to bottom, #e0f2fe 0%, #ffffff 100%);
+  padding: 80px 20px;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-section h1 {
+  font-size: 3.3rem;
+  font-weight: 700;
+  color: #6366f1;
+  margin-bottom: 1.5rem;
+}
+
+.hero-section p {
+  font-size: 1.4rem;
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.hero-section .btn {
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+.badges {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.badge-item {
+  background: white;
+  border-radius: 30px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #4B4BD9 0%, #4B4BD9 100%, rgba(75, 75, 217, 0) 100%);
+  -webkit-background-clip: text;
+  font-size: 3.5rem;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+   /* You can adjust this (e.g., 4rem for even bigger) */
+  font-weight: 700;
+}
+
+
+/* Form container */
+#input-form {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+}
+
+/* Labels */
+.form-label {
+  font-weight: 600;
+  color: #374151; /* Tailwind gray-700 */
+  margin-bottom: 0.5rem;
+}
+
+/* Inputs & Textarea */
+.form-control {
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db; /* Tailwind gray-300 */
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  outline: none;
+}
+
+/* Submit Button */
+#input-form .btn-primary {
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+#input-form .btn-primary:hover {
+  background-color: #4f46e5; /* Darker indigo */
+}
+
+/* Response Output */
+#responseOutput {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.25rem;
+  font-family: monospace;
+  font-size: 0.95rem;
+  white-space: pre-wrap;
+  overflow: auto;
+  max-height: 400px;
+}
+.ai-strategy-btn {
+  background-color: #6366f1; /* Tailwind Indigo-500 */
+  color: #ffffff;
+  
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+ 
+}
+
+.ai-strategy-btn:hover {
+  background-color: #4f46e5; /* darker indigo on hover */
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+}
+
+.ai-strategy-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+.en-lang-btn{
+    background-color: #ffffff;
+    color: #6c757d;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+.en-lang-btn:hover {
+  background-color: #6c757d; /* darker indigo on hover */
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+}
+
+.en-lang-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm">
+  <div class="container-fluid px-4">
+    <!-- Logo Left -->
+    <a class="navbar-brand d-flex align-items-center" href="#">
+<img src="{{ url_for('static', filename='img/flowbit-logo.png') }}" alt="FlowBit Logo" height="40" class="me-2" />
+    </a>
+
+    <!-- Mobile toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavCenter">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Centered nav links + right buttons -->
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNavCenter">
+      <!-- Centered links -->
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link active fw-semibold" aria-current="page" href="http://127.0.0.1:5000/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-semibold" href="http://127.0.0.1:5000/all_logs">All Logs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-semibold" href="#">Contact</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right buttons -->
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-outline-secondary btn-md en-lang-btn">🌐 EN</button>
+      <a href="#" class="btn btn-primary btn-sd fw-semibold shadow-mf ai-strategy-btn">Get Your AI Strategy</a>
+    </div>
+  </div>
+</nav>
+<section class="hero-section">
+  <div class="container">
+    <h1 class="mb-4 text-center gradient-text">Multi-Format Intake Agent</h1>
+    <p>Paste text/email/JSON, or upload JSON or PDF files. Our system will automatically detect and process it.</p>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <a href="#input-form" class="btn btn-primary shadow-sm">Start Now</a>
+      <a href="#" class="btn btn-outline-secondary">Explore Use Cases</a>
+    </div>
+
+    <div class="badges mt-4">
+      <div class="badge-item">
+        <img src="{{ url_for('static', filename='img/GDPR.jpeg') }}" alt="" width="20" />
+        GDPR-compliant
+      </div>
+      <div class="badge-item">
+        <img src="{{ url_for('static', filename='img/EXIST.png') }}" alt="" width="20" />
+        Backed by Exist
+      </div>
+      <div class="badge-item">
+        <img src="{{ url_for('static', filename='img/GERMAN.jpeg') }}" alt="" width="20" />
+        Made in Germany
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <div class="container my-5">
+    <!-- <h1 class="mb-4 text-center">Multi-Format Intake Agent</h1>
+    <p class="text-center mb-4 text-muted">Paste text/email/JSON, or upload JSON or PDF files. Our system will automatically detect and process it.</p> -->
+
+    <form id="input-form" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="inputText" class="form-label">Paste Text / JSON / Email</label>
+        <textarea id="inputText" class="form-control" rows="6" placeholder="Paste text, email content, or JSON here..."></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="jsonFile" class="form-label">Or Upload JSON File</label>
+        <input type="file" id="jsonFile" class="form-control" accept=".json" />
+      </div>
+
+      <div class="mb-3">
+        <label for="pdfFile" class="form-label">Or Upload PDF File</label>
+        <input type="file" id="pdfFile" class="form-control" accept="application/pdf" />
+      </div>
+
+      <div class="mb-3">
+        <label for="conversationId" class="form-label">Conversation ID (optional)</label>
+        <input type="text" id="conversationId" class="form-control" placeholder="e.g. test123" />
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Submit</button>
+    </form>
+
+    <hr />
+
+    <h3>Response</h3>
+    <pre id="responseOutput" class="p-3 bg-white border rounded" style="max-height: 400px; overflow:auto; white-space: pre-wrap;"></pre>
+  </div>
+
+  <script>
+    const form = document.getElementById("input-form");
+    const inputText = document.getElementById("inputText");
+    const jsonFile = document.getElementById("jsonFile");
+    const pdfFile = document.getElementById("pdfFile");
+    const conversationId = document.getElementById("conversationId");
+    const responseOutput = document.getElementById("responseOutput");
+
+    // If user selects JSON file, load its content into textarea
+    jsonFile.addEventListener("change", e => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = event => {
+          inputText.value = event.target.result;
+          pdfFile.value = ""; // Clear PDF file if any
+        };
+        reader.readAsText(file);
+      }
+    });
+
+    // If user selects PDF file, clear textarea and JSON file input
+    pdfFile.addEventListener("change", e => {
+      if (e.target.files.length > 0) {
+        inputText.value = "";
+        jsonFile.value = "";
+      }
+    });
+    function generateConversationId() {
+  return 'conv-' + crypto.getRandomValues(new Uint32Array(1))[0].toString(36);
+}
+
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      
+      // Validate input:
+      const hasTextInput = inputText.value.trim().length > 0;
+      const hasJsonFile = jsonFile.files.length > 0;
+      const hasPdfFile = pdfFile.files.length > 0;
+      // const convIdVal = conversationId.value.trim();
+      let convIdVal = conversationId.value.trim();
+if (!convIdVal) {
+  convIdVal = generateConversationId();
+  conversationId.value = convIdVal; // Optional: display it in the input field
+}
+
+
+      if (!hasTextInput && !hasJsonFile && !hasPdfFile) {
+        alert("Please provide some input text or upload a JSON or PDF file.");
+        return;
+      }
+
+      try {
+        let res, data;
+
+        if (hasPdfFile) {
+          // For PDF, send as multipart/form-data
+          const formData = new FormData();
+          formData.append("pdf_file", pdfFile.files[0]);
+          if (convIdVal) formData.append("conversation_id", convIdVal);
+
+          res = await fetch("/parse_pdf", {
+            method: "POST",
+            body: formData,
+          });
+          data = await res.json();
+        } else {
+          // For text or JSON file content, send as JSON to route_input
+          let inputContent = inputText.value.trim();
+
+          // If JSON file selected and textarea empty (rare, but just in case)
+          if (!inputContent && hasJsonFile) {
+            const file = jsonFile.files[0];
+            inputContent = await file.text();
+          }
+
+          res = await fetch("/route_input", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              input: inputContent,
+              conversation_id: convIdVal || null,
+            }),
+          });
+
+          data = await res.json();
+        }
+
+        responseOutput.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        responseOutput.textContent = `Error: ${err.message}`;
+      }
+    });
+  </script>
+</body>
+</html>
