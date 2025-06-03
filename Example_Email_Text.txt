@@ -1,0 +1,12 @@
+Subject: Complaint about delayed delivery
+From: customer@example.com
+Date: 2025-06-01
+
+Dear Support,
+
+I placed an order two weeks ago, but it has not arrived yet. Please look into this matter urgently.
+
+Regards,
+Customer
+
+

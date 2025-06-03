@@ -1,0 +1,17 @@
+{
+  "invoice_number": "INV-12345",
+  "date": "2025-05-31",
+  "customer": {
+    "name": "Bob's Hardware",
+    "email": "bob@example.com"
+  },
+  "items": [
+    {"product_id": "P001", "qty": 10, "price": 15.0},
+    {"product_id": "P002", "qty": 5, "price": 25.0}
+  ],
+  "total": 275.0,
+  "request": "Please process payment within 30 days",
+  "sender": "billing@bobshardware.com",
+  "subject": "Invoice INV-12345 for recent order",
+  "urgency": "normal"
+}

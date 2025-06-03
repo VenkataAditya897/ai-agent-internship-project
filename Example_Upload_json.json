@@ -1,0 +1,14 @@
+{
+  "sender": "john.doe@example.com",
+  "subject": "Meeting Schedule",
+  "date": "2025-06-02T10:00:00Z",
+  "body": "Hi team,\nPlease find the meeting schedule for next week attached.\nBest, John",
+  "attachments": [
+    {
+      "filename": "schedule.pdf",
+      "filetype": "application/pdf",
+      "size_kb": 120
+    }
+  ],
+  "priority": "high"
+}
